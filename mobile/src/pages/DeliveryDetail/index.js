@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar, Alert } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { parseISO, format } from 'date-fns';
 import OperationButton from '../../components/OperationButton';
 import WithDrawButton from '../../components/WithDrawButton';
-import { withDraw } from '../../store/modules/deliveries/actions';
 import api from '../../services/api';
 
 import {
@@ -27,18 +26,10 @@ import {
 export default function DeliveryDetail({ navigation, route }) {
   let messageError = '';
 
-  // const dispatch = useDispatch();
-  // const status = useSelector((state) => state.deliveries.delivery_status);
-
-  const [statusAux, setStatusAux] = useState('');
-  const [startDateAux, setStartDateAux] = useState('');
-
-  // const delivery = route.params.item;
   const [delivery, setDelivery] = useState([]);
   const { id, deliveryman_id } = route.params.item;
 
   async function loadDelivery(idDelivery) {
-    console.log('deliveryman_id:', deliveryman_id, idDelivery);
     const response = await api.get(
       `/deliverymans/${deliveryman_id}/deliveries/`,
       {
@@ -47,21 +38,18 @@ export default function DeliveryDetail({ navigation, route }) {
         },
       }
     );
-    console.log('DeliveryDetail:', response.data.rows);
     setDelivery(response.data.rows[0]);
   }
 
-  // const delivery = route.params.item;
-
-  const startDate = delivery.start_date
+  const startDate = delivery?.start_date
     ? format(parseISO(delivery.start_date), 'dd/MM/yyyy')
     : '--/--/--';
-  const endDate = delivery.end_date
+  const endDate = delivery?.end_date
     ? format(parseISO(delivery.end_date), 'dd/MM/yyyy')
     : '--/--/--';
 
   function handleNewProblem() {
-    if (delivery.status === 'PENDENTE' && statusAux !== 'RETIRADA') {
+    if (delivery.status === 'PENDENTE' && delivery.status !== 'RETIRADA') {
       messageError =
         'Encomenda deve ser retirada primeiro para registrar um problema!';
     } else if (delivery.status === 'ENTREGUE') {
@@ -90,11 +78,6 @@ export default function DeliveryDetail({ navigation, route }) {
       loadDelivery(id);
     });
   }, []);
-
-  // useEffect(() => {
-  //   console.log('chamando loadDelivery:...', id);
-  //   loadDelivery(id);
-  // }, []);
 
   function handleViewProblem() {
     navigation.navigate('ViewProblem', {
@@ -128,14 +111,7 @@ export default function DeliveryDetail({ navigation, route }) {
     navigation.navigate('ConfirmDelivery', { id: delivery.id });
   }
 
-  function setInfoAux() {
-    setStatusAux('RETIRADA');
-    setStartDateAux(format(new Date().getTime(), 'dd/MM/yyyy'));
-  }
-
   async function handleWithDraw(idDelivery) {
-    console.log(idDelivery, delivery.deliveryman_id);
-
     try {
       const response = await api.put(`/deliveries/${idDelivery}/start`, {
         deliveryman_id: delivery.deliveryman_id,
@@ -152,7 +128,7 @@ export default function DeliveryDetail({ navigation, route }) {
         [
           {
             text: 'OK',
-            onPress: () => loadDelivery(id), // setInfoAux(),
+            onPress: () => loadDelivery(id),
           },
         ],
         { cancelable: false }
@@ -190,13 +166,6 @@ export default function DeliveryDetail({ navigation, route }) {
           <Header>
             <Icon name="event" size={30} color="#7d40e7" />
             <LabelHeader>Situação da Entrega</LabelHeader>
-            {/* <ContainerWithDraw
-              status={
-                statusAux === 'RETIRADA'
-                  ? false
-                  : delivery.status === 'PENDENTE'
-              }
-            > */}
             <ContainerWithDraw status={delivery.status === 'PENDENTE'}>
               <WithDrawButton
                 icon="thumb-up"
@@ -211,18 +180,15 @@ export default function DeliveryDetail({ navigation, route }) {
           <InfoView>
             <Info>
               <Label>STATUS</Label>
-              {/* <Text>{statusAux || delivery.status}</Text> */}
               <Text>{delivery.status}</Text>
             </Info>
             <InfoDate>
               <Info>
                 <Label>DATA DE RETIRADA</Label>
-                {/* <Text>{startDateAux || startDate}</Text> */}
                 <Text>{startDate}</Text>
               </Info>
               <Info>
                 <Label>DATA DE ENTREGA</Label>
-                {/* <Text>{endDate}</Text> */}
                 <Text>{endDate}</Text>
               </Info>
             </InfoDate>
@@ -234,26 +200,34 @@ export default function DeliveryDetail({ navigation, route }) {
             colorIcon="#f00"
             navigation={navigation}
             onPress={handleNewProblem}
-          >
-            Informar Problema
-          </OperationButton>
+            label="Informar Problema"
+          />
           <OperationButton
             icon="info-outline"
             colorIcon="#e7ba40"
             navigation={navigation}
             onPress={handleViewProblem}
-          >
-            Visualizar Problemas
-          </OperationButton>
+            label="Visualizar Problemas"
+          />
           <OperationButton
             icon="check-circle"
             colorIcon="#7d40e7"
             onPress={handleConfirmDelivery}
-          >
-            Confirmar Entrega
-          </OperationButton>
+            label="Confirmar Entrega"
+          />
         </DeliveryButtons>
       </Container>
     </>
   );
 }
+
+DeliveryDetail.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func,
+  }).isRequired,
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.number,
+    }),
+  }).isRequired,
+};

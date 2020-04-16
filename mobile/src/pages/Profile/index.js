@@ -11,17 +11,16 @@ import {
   DeliverymanInfo,
   Label,
   Info,
+  Text,
 } from './styles';
 
-export default function Profile({ navigation }) {
+export default function Profile() {
   const deliveryMan = useSelector((state) => state.user);
   const dispatch = useDispatch();
   let dateFormatted = '';
   function handleLogout() {
     dispatch(signOut());
   }
-  console.log(deliveryMan);
-
   if (deliveryMan.profile) {
     dateFormatted =
       format(parseISO(deliveryMan.profile?.createdAt), 'dd/MM/yyyy') || '';
@@ -47,7 +46,9 @@ export default function Profile({ navigation }) {
           <Info>{dateFormatted}</Info>
         </DeliverymanInfo>
 
-        <SubmitButton onPress={handleLogout}>Logout</SubmitButton>
+        <SubmitButton onPress={handleLogout}>
+          <Text>Logout</Text>
+        </SubmitButton>
       </Container>
     </>
   );

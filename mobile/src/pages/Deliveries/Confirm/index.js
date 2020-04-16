@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Alert } from 'react-native';
+import PropTypes from 'prop-types';
 import api from '../../../services/api';
 
 import {
@@ -7,9 +8,7 @@ import {
   Camera as RNCamera,
   IconButton,
   Icon,
-  Header,
   Footer,
-  IconButtonTop,
   ContainerConfirm,
   SubmitButton,
   Text,
@@ -17,14 +16,14 @@ import {
 
 const androidCameraPermissionOptions = {
   title: 'Permissão para usar a câmera',
-  message: 'Gostaria da sua permissão para usar sua câmera',
+  message: 'FastFeet precisa de permissão para usar a câmera',
   buttonPositive: 'Ok',
   buttonNegative: 'Cancelar',
 };
 
 const androidRecordAudioPermissionOptions = {
   title: 'Permissão para usar o microfone',
-  message: 'Gostaria da sua permissão para usar seu microfone',
+  message: 'FastFeet precisa de permissão para usar seu microfone',
   buttonPositive: 'Ok',
   buttonNegative: 'Cancelar',
 };
@@ -48,8 +47,6 @@ export default function ConfirmDelivery({ navigation, route }) {
 
         const { id } = response.data;
 
-        console.log(response.data);
-
         const endResponse = await api.put(`deliveries/${idDelivery}/end`, {
           signature_id: id,
         });
@@ -72,6 +69,10 @@ export default function ConfirmDelivery({ navigation, route }) {
           ],
           { cancelable: false }
         );
+      } else {
+        Alert.alert(
+          'Você deve Capturar a Assinatura do Destinatário Primeiro!'
+        );
       }
     } catch (error) {
       Alert.alert(
@@ -93,8 +94,6 @@ export default function ConfirmDelivery({ navigation, route }) {
         pauseAfterCapture: true,
       };
       const data = await camera.takePictureAsync(options);
-
-      console.log('data:', data);
 
       Alert.alert(
         'Confirmar Assinatura',
@@ -129,18 +128,6 @@ export default function ConfirmDelivery({ navigation, route }) {
         {({ camera, status }) => {
           return (
             <Container>
-              <Header>
-                {/* <IconButtonTop onPress={() => setFlashMode((value) => !value)}>
-                <Icon
-                  name={flashMode ? 'flash-on' : 'flash-off'}
-                  size={30}
-                  color="#fff"
-                />
-              </IconButtonTop> */}
-                {/* <IconButtonTop onPress={() => closeCamera()}>
-                <Icon name="close" size={30} color="#fff" />
-              </IconButtonTop> */}
-              </Header>
               <Footer>
                 <IconButton
                   onPress={() => takePicture(camera)}
@@ -153,9 +140,20 @@ export default function ConfirmDelivery({ navigation, route }) {
           );
         }}
       </RNCamera>
-      <SubmitButton onPress={handleSubmit}>
+      <SubmitButton disabled={!signaturePhoto} onPress={handleSubmit}>
         <Text>Enviar</Text>
       </SubmitButton>
     </ContainerConfirm>
   );
 }
+
+ConfirmDelivery.propTypes = {
+  navigation: PropTypes.shape({
+    goBack: PropTypes.func,
+  }).isRequired,
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.number,
+    }),
+  }).isRequired,
+};

@@ -1,13 +1,28 @@
-import React from 'react';
-import { Container } from './styles';
+import React, {useState} from 'react';
+import { Container, ContainerModal } from './styles';
 import propTypes from 'prop-types';
 import history from '~/services/history';
 import api from '~/services/api';
 import { toast } from 'react-toastify';
 import { confirmAlert } from 'react-confirm-alert';
 import { MdRemoveRedEye, MdModeEdit, MdDeleteForever } from 'react-icons/md';
+import Modal from '~/components/ReactModal';
+
+const ContentModal = ({ item }) => {
+  return (
+    <ContainerModal>
+      <p>
+        <strong>VISUALIZAR PROBLEMA</strong>
+      </p>
+      <p>{item && item.description}</p>
+    </ContainerModal>
+  );
+}
+
 
 export default function DropDownMenu({ visible, entity, item = [] }) {
+
+  const [modalShow, setModalShow] = useState(false);
 
   function disable(entity, item) {
     switch (entity) {
@@ -43,7 +58,7 @@ export default function DropDownMenu({ visible, entity, item = [] }) {
           width: '172px',
           right: '-65px'
         }
-        default:
+      default:
         return false;
     }
   }
@@ -55,7 +70,13 @@ export default function DropDownMenu({ visible, entity, item = [] }) {
   }
 
   function handleShow(item) {
-    history.push(`/${entity}/show`, { item });
+
+    if (entity !== 'problems') {
+      history.push(`/${entity}/show`, { item });
+    } else {
+      setModalShow(true)
+    }
+
   }
 
   function confirmExclusion(id) {
@@ -75,7 +96,6 @@ export default function DropDownMenu({ visible, entity, item = [] }) {
             }
 
             toast.success('Registro Excluído com Sucesso!');
-            console.log('excluindo...', id)
             history.push(`/${entity}/`, { id })
           }
         },
@@ -129,9 +149,9 @@ export default function DropDownMenu({ visible, entity, item = [] }) {
       case 'deliverymans':
         return (
           <>
-              <li><MdModeEdit size={12} color="#558aef" /><button disabled={disable(entity, item)} onClick={() => handleEdit(item)}>Editar</button></li>
-              <li><MdDeleteForever size={12} color="#e25353" /><button disabled={disable(entity, item)} onClick={() => confirmExclusion(item.id)}>Excluir</button></li>
-            </>
+            <li><MdModeEdit size={12} color="#558aef" /><button disabled={disable(entity, item)} onClick={() => handleEdit(item)}>Editar</button></li>
+            <li><MdDeleteForever size={12} color="#e25353" /><button disabled={disable(entity, item)} onClick={() => confirmExclusion(item.id)}>Excluir</button></li>
+          </>
         )
       default:
         break;
@@ -140,15 +160,22 @@ export default function DropDownMenu({ visible, entity, item = [] }) {
   }
 
   return (
-    <Container visible={visible} size={size}>
-      <ul>
-        {getMenus(entity)}
-      </ul>
-    </Container>
+    <>
+      <Modal open={modalShow} setOpen={() => setModalShow(!modalShow)}>
+        <ContentModal item={item} />
+      </Modal>
+      <Container visible={visible} size={size}>
+        <ul>
+          {getMenus(entity)}
+        </ul>
+      </Container>
+    </>
   );
 }
 
 DropDownMenu.propTypes = {
-  size: propTypes.array
+  visible: propTypes.bool,
+  entity: propTypes.string,
+  item: propTypes.object
 };
 

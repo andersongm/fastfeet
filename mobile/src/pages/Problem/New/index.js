@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Alert } from 'react-native';
+import PropTypes from 'prop-types';
 import api from '../../../services/api';
 
 import {
@@ -56,7 +57,8 @@ export default function NewProblem({ navigation, route }) {
           onChangeText={(text) => setProblem(text)}
         />
         <ButtonContainer>
-          <SubmitButton onPress={handleSubmit}>
+          {/* <SubmitButton active={!problem} onPress={problem && handleSubmit}> */}
+          <SubmitButton disabled={!problem} onPress={handleSubmit}>
             <Text>Enviar</Text>
           </SubmitButton>
         </ButtonContainer>
@@ -64,3 +66,15 @@ export default function NewProblem({ navigation, route }) {
     </Container>
   );
 }
+
+NewProblem.propTypes = {
+  // .navigation: PropTypes.func,
+  navigation: PropTypes.shape({
+    goBack: PropTypes.func.isRequired,
+  }).isRequired,
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.number,
+    }),
+  }).isRequired,
+};

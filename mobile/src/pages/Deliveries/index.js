@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Alert, TouchableOpacity, StatusBar } from 'react-native';
+import { TouchableOpacity, StatusBar } from 'react-native';
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import api from '../../services/api';
 import Card from './Card';
+import Empty from '../../components/Empty';
 import { signOut } from '~/store/modules/auth/actions';
 
 import {
   Container,
-  SubmitButton,
   HeaderPage,
   Avatar,
   DeliveryManInfo,
@@ -27,14 +28,11 @@ export default function Deliveries({ navigation }) {
   const [currentStatus, setCurrentStatus] = useState('pendente');
   const deliveryMan = useSelector((state) => state.user);
   const [loading, setLoading] = useState(false);
-  // const status = useSelector((state) => state.deliveries.delivery_status);
   const [currentPage, setCurrenPage] = useState(1);
   const [totalRecords, setTotalRecords] = useState(0);
   const endPage = Math.ceil(totalRecords / 5);
 
   const dispatch = useDispatch();
-
-  // console.log('totalRecords:', totalRecords);
 
   async function loadDeliveries(id, statusDelivery = null, page = 1) {
     setLoading(true);
@@ -44,26 +42,11 @@ export default function Deliveries({ navigation }) {
         page,
       },
     });
-    // console.log('loadDeliveries:', page);
     const { count, rows } = response.data;
     setCurrenPage(page);
     setTotalRecords(count);
 
-    // let filtereds = null;
-
-    // if (statusDelivery) {
-    //   filtereds = rows.filter(
-    //     (delivery) => delivery.status === String(statusDelivery).toUpperCase()
-    //   );
-    // } else {
-    //   filtereds = rows.filter(
-    //     (delivery) =>
-    //       delivery.status === 'RETIRADA' || delivery.status === 'PENDENTE'
-    //   );
-    // }
-
     setDeliveries(rows);
-    // setDeliveries(filtereds);
     setLoading(false);
   }
 
@@ -98,19 +81,18 @@ export default function Deliveries({ navigation }) {
     setCurrentStatus('pendente');
     loadDeliveries(deliveryMan.profile.id, 'pendente');
     setCurrent(!current);
-    Alert.alert(currentStatus);
   }
 
   function handleGetDelivered() {
     setCurrentStatus('entregue');
     loadDeliveries(deliveryMan.profile.id, 'entregue');
     setCurrent(!current);
-    Alert.alert(currentStatus);
   }
 
   return (
     <>
       <StatusBar barStyle="dark-content" />
+
       <Container>
         <HeaderPage>
           <Avatar
@@ -149,8 +131,15 @@ export default function Deliveries({ navigation }) {
           )}
           onEndReachedThreshold={0.2}
           onEndReached={loadMore}
+          ListEmptyComponent={<Empty />}
         />
       </Container>
     </>
   );
 }
+
+Deliveries.propTypes = {
+  navigation: PropTypes.shape({
+    addListener: PropTypes.func,
+  }).isRequired,
+};
