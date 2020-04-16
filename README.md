@@ -3,7 +3,7 @@
 </h2>
 
 <h1 align="center">
-  <img alt="Fastfeet" title="Fastfeet" src="https://github.com/andersongm/fastfeet/blob/master/imagens/fastfeet-logo.png" width="200px" />
+  <img alt="Fastfeet" title="Fastfeet" src="https://github.com/andersongm/fastfeet/blob/master/.images/fastfeet-logo.png" width="200px" />
 </h1>
 
 <h3 align="center">
@@ -44,7 +44,7 @@ O Entregador terá acesso ao aplicativo mobile para que o mesmo realize as entre
 * Styled-Components
 * Unform
 
-![FrontEnd](https://github.com/andersongm/fastfeet/blob/master/imagens/FrontEnd_FastFeet.png)
+![FrontEnd](https://github.com/andersongm/fastfeet/blob/master/.images/FrontEnd_FastFeet.png)
 
 ### Mobile
 
@@ -55,7 +55,7 @@ O Entregador terá acesso ao aplicativo mobile para que o mesmo realize as entre
 * Styled-Components
 * React-Native-Camera
 
-![Mobile](https://github.com/andersongm/fastfeet/blob/master/imagens/Mobile_FastFeet.png)
+![Mobile](https://github.com/andersongm/fastfeet/blob/master/.images/Mobile_FastFeet.png)
 
 
 ### Instalação e execução
