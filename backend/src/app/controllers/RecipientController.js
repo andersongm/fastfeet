@@ -49,7 +49,7 @@ class RecipientController {
 
   async update(req, res) {
     const { id } = req.params;
-    console.log(req.body);
+    
     const recipient = await Recipient.findByPk(id);
 
     await recipient.update(req.body);

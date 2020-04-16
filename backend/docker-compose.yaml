@@ -1,20 +1,6 @@
 version: "3.7"
 
 services:
-  # fastfeet-server:
-  #   container_name: fastfeet-server
-  #   build: '.'
-  #   #entrypoint: ['./init.sh']
-  #   # volumes:
-  #   #   - fastfeet-server-data:/data
-  #   depends_on:
-  #     - fastfeet-db
-  #     - fastfeet-redis
-  #   networks:
-  #     - app-connect
-  #   ports:
-  #     - '3333:3333'
-
   fastfeet-db:
     container_name: fastfeet-db
     image: postgres:11
