@@ -1,65 +1,84 @@
 ## Projeto Final - Bootcamp 9 - FastFeet
 
-
-**BackEnd, FrontEnd and Mobile**
+<h3 align="center">
+  Fastfeet, Frontend, Mobile e Backend
+</h3>
 
 ### **Tecnologias Utilizadas**
 
 ### BackEnd
 
-NodeJS <br/>
-Docker <br/>
-Redis <br/>
-Express <br/>
-Date-Fns <br/>
-Json Web Token <br/>
-Multer <br/>
-Sequelize <br/>
-Yup <br/>
-Nodemailer <br/>
-Bcrypt <br/>
-Bee-queue <br/>
+* NodeJS
+* Docker
+* Redis
+* Express
+* Date-Fns
+* Json Web Token
+* Multer
+* Sequelize
+* Yup
+* Nodemailer
+* Bcrypt
+* Bee-queue
 
 
 ### FrontEnd
 
-React <br/>
-Axios <br/>
-React-Redux <br/>
-React-Router-Dom <br/>
-Redux <br/>
-Redux-Saga <br/>
-Styled-Components <br/>
-Unform <br/>
+* React
+* Axios
+* React-Redux
+* React-Router-Dom
+* Redux
+* Redux-Saga
+* Styled-Components
+* Unform
 
-![FrontEnd Login](https://github.com/andersongm/fastfeet/blob/master/imagens/frontend_login.png)
+![FrontEnd](https://github.com/andersongm/fastfeet/blob/master/imagens/FrontEnd_FastFeet.png)
 
 ### Mobile
 
-React Native <br/>
-Unform/Mobile <br/>
-Immer <br/>
-React-Navigation-5 <br/>
-Styled-Components <br/>
-React-Native-Camera <br/>
+* React Native
+* Unform/Mobile
+* Immer
+* React-Navigation-5
+* Styled-Components
+* React-Native-Camera
 
-![FrontEnd Login](https://github.com/andersongm/fastfeet/blob/master/imagens/mobile_login.png)
+![Mobile](https://github.com/andersongm/fastfeet/blob/master/imagens/Mobile_FastFeet.png)
 
 
 ### Instalação e execução
 
 1. Fazer o clone deste repositório
 
-No Backend
+```
+git clone https://github.com/andersongm/fastfeet.git
+```
+
+__Backend__
 1. Crie o arquivo .env usando como exemplo o arquivo .env.example
 2. Na raiz do projeto execute docker-compose up para subir os containers de DataBase e Redis
-3. Na raiz do projeto execute yarn dev
+3. Na raiz do projeto execute yarn dev & yarn queue
 4. Em outro terminal do VS Code execute yarn queue
 
+#### Executar Migrations - Seeds
+```
+yarn sequelize db:migrate
+```
+
 #### Incluir Registros - Seeds
+```
+yarn sequelize db:seed:all
+```
 
-No Frontend
-1. Na Raiz do projeto execute yarn start
+__Frontend__
 
-4 - Mobile
-b) Na Raiz do projeto execute react-native run-ios
+1. Na Raiz do projeto execute yarn para baixar as libs
+2. Execute yarn start para iniciar o servidor
+
+__Mobile__
+
+1. Na Raiz do projeto execute yarn para baixar as libs
+2. Execute react-native run-ios para iniciar o Simulador do IOS
+
+__Observação:__ O projeto foi desenvolvido com foco na utilização do IOS
