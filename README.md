@@ -32,7 +32,7 @@ Redux-Saga <br/>
 Styled-Components <br/>
 Unform <br/>
 
-![FrontEnd Login](https://github.com/andersongm/fastfeet/blob/master/imagens/frontend_login.png)
+![FrontEnd](https://github.com/andersongm/fastfeet/blob/master/imagens/FrontEnd_FastFeet.png)
 
 ### Mobile
 
@@ -43,7 +43,7 @@ React-Navigation-5 <br/>
 Styled-Components <br/>
 React-Native-Camera <br/>
 
-![FrontEnd Login](https://github.com/andersongm/fastfeet/blob/master/imagens/mobile_login.png)
+![Mobile](https://github.com/andersongm/fastfeet/blob/master/imagens/Mobile_FastFeet.png)
 
 
 ### Instalação e execução
