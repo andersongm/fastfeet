@@ -55,7 +55,7 @@
 git clone https://github.com/andersongm/fastfeet.git
 ```
 
-Backend
+__Backend__
 1. Crie o arquivo .env usando como exemplo o arquivo .env.example
 2. Na raiz do projeto execute docker-compose up para subir os containers de DataBase e Redis
 3. Na raiz do projeto execute yarn dev & yarn queue
@@ -71,9 +71,14 @@ yarn sequelize db:migrate
 yarn sequelize db:seed:all
 ```
 
-Frontend
+__Frontend__
+
 1. Na Raiz do projeto execute yarn para baixar as libs
 2. Execute yarn start para iniciar o servidor
 
-Mobile
-b) Na Raiz do projeto execute react-native run-ios
+__Mobile__
+
+1. Na Raiz do projeto execute yarn para baixar as libs
+2. Execute react-native run-ios para iniciar o Simulador do IOS
+
+__Observação:__ O projeto foi desenvolvido com foco na utilização do IOS
