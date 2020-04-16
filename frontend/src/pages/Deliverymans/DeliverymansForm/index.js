@@ -38,7 +38,7 @@ export default function DeliveryMansForm({ location }) {
         toast.success('Entregador Salvo com Sucesso!')
       }
     } catch (error) {
-      console.log(JSON.stringify(error));
+      
       toast.error(`Falha ao salvar entregador! \n ${error.response.data.error}`);
     }
   }
