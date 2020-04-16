@@ -1,7 +1,8 @@
 ## Projeto Final - Bootcamp 9 - FastFeet
 
-
-**BackEnd, FrontEnd and Mobile**
+<h3 align="center">
+  Fastfeet, Frontend, Mobile e Backend
+</h3>
 
 ### **Tecnologias Utilizadas**
 
@@ -52,19 +53,27 @@
 
 ```
 git clone https://github.com/andersongm/fastfeet.git
-
 ```
 
-No Backend
+Backend
 1. Crie o arquivo .env usando como exemplo o arquivo .env.example
 2. Na raiz do projeto execute docker-compose up para subir os containers de DataBase e Redis
-3. Na raiz do projeto execute yarn dev
+3. Na raiz do projeto execute yarn dev & yarn queue
 4. Em outro terminal do VS Code execute yarn queue
 
+#### Executar Migrations - Seeds
+```
+yarn sequelize db:migrate
+```
+
 #### Incluir Registros - Seeds
+```
+yarn sequelize db:seed:all
+```
 
-No Frontend
-1. Na Raiz do projeto execute yarn start
+Frontend
+1. Na Raiz do projeto execute yarn para baixar as libs
+2. Execute yarn start para iniciar o servidor
 
-4 - Mobile
+Mobile
 b) Na Raiz do projeto execute react-native run-ios
