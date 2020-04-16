@@ -10,6 +10,11 @@
   Backend | Frontend | Mobile 
 </h3>
 
+#### O FastFeet é um sistema para Gestão e Entrega de Encomendas. 
+A aplicação permite que um usuário autenticado possa cadastrar/gerenciar Entregadores, Destinatários e Encomendas.
+O Entregador terá acesso ao aplicativo mobile para que o mesmo realize as entregas registradas para seu usuário.
+
+
 ### **Tecnologias Utilizadas**
 
 ### BackEnd
@@ -65,14 +70,14 @@ __Backend__
 1. Crie o arquivo .env usando como exemplo o arquivo .env.example
 2. Na raiz do projeto execute docker-compose up para subir os containers de DataBase e Redis
 3. Na raiz do projeto execute yarn dev & yarn queue
-4. Em outro terminal do VS Code execute yarn queue
 
-#### Executar Migrations - Seeds
+
+#### Executar as Migrations
 ```
 yarn sequelize db:migrate
 ```
 
-#### Incluir Registros - Seeds
+#### Incluir Registro de Admin - Seeds
 ```
 yarn sequelize db:seed:all
 ```
