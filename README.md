@@ -7,41 +7,41 @@
 
 ### BackEnd
 
-NodeJS <br/>
-Docker <br/>
-Redis <br/>
-Express <br/>
-Date-Fns <br/>
-Json Web Token <br/>
-Multer <br/>
-Sequelize <br/>
-Yup <br/>
-Nodemailer <br/>
-Bcrypt <br/>
-Bee-queue <br/>
+* NodeJS
+* Docker
+* Redis
+* Express
+* Date-Fns
+* Json Web Token
+* Multer
+* Sequelize
+* Yup
+* Nodemailer
+* Bcrypt
+* Bee-queue
 
 
 ### FrontEnd
 
-React <br/>
-Axios <br/>
-React-Redux <br/>
-React-Router-Dom <br/>
-Redux <br/>
-Redux-Saga <br/>
-Styled-Components <br/>
-Unform <br/>
+* React
+* Axios
+* React-Redux
+* React-Router-Dom
+* Redux
+* Redux-Saga
+* Styled-Components
+* Unform
 
 ![FrontEnd](https://github.com/andersongm/fastfeet/blob/master/imagens/FrontEnd_FastFeet.png)
 
 ### Mobile
 
-React Native <br/>
-Unform/Mobile <br/>
-Immer <br/>
-React-Navigation-5 <br/>
-Styled-Components <br/>
-React-Native-Camera <br/>
+* React Native
+* Unform/Mobile
+* Immer
+* React-Navigation-5
+* Styled-Components
+* React-Native-Camera
 
 ![Mobile](https://github.com/andersongm/fastfeet/blob/master/imagens/Mobile_FastFeet.png)
 
@@ -49,6 +49,11 @@ React-Native-Camera <br/>
 ### Instalação e execução
 
 1. Fazer o clone deste repositório
+
+```
+git clone https://github.com/andersongm/fastfeet.git
+
+```
 
 No Backend
 1. Crie o arquivo .env usando como exemplo o arquivo .env.example
