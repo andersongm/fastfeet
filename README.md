@@ -7,7 +7,7 @@
 </h1>
 
 <h3 align="center">
-  Fastfeet, Frontend, Mobile e Backend
+  Backend | Frontend | Mobile 
 </h3>
 
 ### **Tecnologias Utilizadas**
