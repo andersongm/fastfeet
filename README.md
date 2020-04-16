@@ -1,4 +1,10 @@
-## Projeto Final - Bootcamp 9 - FastFeet
+<h2 align="center">
+  Projeto Final - Bootcamp - FastFeet
+</h2>
+
+<h1 align="center">
+  <img alt="Fastfeet" title="Fastfeet" src="https://github.com/andersongm/fastfeet/blob/master/imagens/fastfeet-logo.png" width="200px" />
+</h1>
 
 <h3 align="center">
   Fastfeet, Frontend, Mobile e Backend
